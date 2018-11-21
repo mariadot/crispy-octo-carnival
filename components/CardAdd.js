@@ -7,13 +7,14 @@ export default class AddCard extends React.Component {
     question: '',
     answer: ''
   }
-
+  // Controlled component
   handleQuestionChange = (question) => {
     this.setState(()=>({
       question
     }))
   }
 
+  // Controlled component
   handleAnswerChange = (answer) => {
     this.setState(()=>({
       answer
@@ -21,7 +22,6 @@ export default class AddCard extends React.Component {
   }
 
   createNewCard = (question, answer, deck) => {
-    console.log(this.props.navigation);
     if(question && answer){
       addCardToDeck(question, answer, deck);
       this.props.navigation.navigate('ViewDeck', { deckId: deck });

@@ -5,7 +5,6 @@ import { getDeck } from '../utils/api';
 export default class DeckView extends React.Component {
   static navigationOptions = ({navigation}) => {
     const { deckId } = navigation.state.params;
-    console.log(deckId);
     return {
       title: deckId
     }
