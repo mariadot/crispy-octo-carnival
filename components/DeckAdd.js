@@ -1,12 +1,27 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
 
 export default class DeckAdd extends React.Component {
+  state = {
+    name: ''
+  }
+
+  handleInputChange = (name) => {
+    this.setState(()=>({
+      name
+    }))
+  }
+
   render() {
+    const { name } = this.state;
     return (
-      <View style={styles.new}>
-        <Text>New deck</Text>
-      </View>
+      <KeyboardAvoidingView behavior='padding' style={styles.new}>
+        <Text>What is the title of your new deck?</Text>
+        <TextInput value={name} style={styles.input} onChangeText={this.handleInputChange} />
+        <TouchableOpacity style={styles.button} onPress={()=>console.log('Add deck!')}>
+          <Text>Add</Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -17,5 +32,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'royalblue',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    height: 50,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: 'black',
+    width: 200,
+    margin: 20
+  },
+  button: {
+    borderColor: 'black',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    color: 'white',
+    padding: 10
   }
 });
