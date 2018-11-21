@@ -5,8 +5,9 @@ export default class DeckInfo extends React.Component {
   render() {
     return (
       <View style={styles.info}>
-        <TouchableOpacity onPress={()=> this.props.navigation.navigate('DeckView')}>
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate('ViewDeck')}>
           <Text>Deck info</Text>
+          <Text># of cards</Text>
           </TouchableOpacity> 
       </View>
     );

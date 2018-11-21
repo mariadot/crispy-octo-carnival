@@ -1,14 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import DeckList from './components/DeckList';
-import NewDeck from './components/NewDeck';
 import DeckView from './components/DeckView';
+import DeckAdd from './components/DeckAdd';
+import CardAdd from './components/CardAdd';
+import DeckQuiz from './components/DeckQuiz';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 
 export default class App extends React.Component {
   render() {
     return (
-        <MainNavigation />
+        <View style={styles.container} >
+          <MainNavigation />
+        </View>
     );
   }
 }
@@ -17,13 +21,15 @@ const TabNav = TabNavigator({
   Home: {
     screen: DeckList,
     navigationOptions: {
-      tabBarLabel: 'Decks'
+      tabBarLabel: 'Decks',
+      title: 'Home'
     }
   }, 
   AddDeck: {
-    screen: NewDeck,
+    screen: DeckAdd,
     navigationOptions: {
-      tabBarLabel: 'Add Deck'
+      tabBarLabel: 'Add Deck',
+      title: 'Add Deck'
     }
   }
 });
@@ -32,16 +38,26 @@ const MainNavigation = StackNavigator({
   Home: {
     screen: TabNav,
   },
-  DeckView: {
+  ViewDeck: {
     screen: DeckView
+  },
+  AddCard: {
+    screen: CardAdd,
+    navigationOptions: {
+      title: 'Add Card'
+    }
+  },
+  ViewQuiz: {
+    screen: DeckQuiz,
+    navigationOptions: {
+      title: 'Deck Quiz'
+    }
   }
 })
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'indigo'
   },
 });
