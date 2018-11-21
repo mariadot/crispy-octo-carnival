@@ -1,21 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default class NewDeck extends React.Component {
+export default class AddCard extends React.Component {
   render() {
     return (
-      <View style={styles.new}>
-        <Text>New deck</Text>
+      <View style={styles.question}>
+        <Text>Add Card</Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  new: {
+  question: {
     flex: 1,
-    backgroundColor: 'blue',
+    backgroundColor: 'salmon',
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });
