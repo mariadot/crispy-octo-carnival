@@ -41,7 +41,6 @@ export default class DeckList extends React.Component {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
-    backgroundColor: 'green',
     alignItems: 'center',
   },
 });

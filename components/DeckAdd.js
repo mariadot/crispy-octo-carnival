@@ -39,7 +39,6 @@ export default class DeckAdd extends React.Component {
 const styles = StyleSheet.create({
   new: {
     flex: 1,
-    backgroundColor: 'royalblue',
     alignItems: 'center',
     justifyContent: 'center',
   },

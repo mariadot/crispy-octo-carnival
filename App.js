@@ -7,6 +7,7 @@ import CardAdd from './components/CardAdd';
 import DeckQuiz from './components/DeckQuiz';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { setDummyData } from './utils/api';
+import { Entypo } from '@expo/vector-icons';
 
 export default class App extends React.Component {
   componentDidMount(){
@@ -27,14 +28,16 @@ const TabNav = TabNavigator({
     screen: DeckList,
     navigationOptions: {
       tabBarLabel: 'Decks',
-      title: 'Home'
+      title: 'Home',
+      tabBarIcon: <Entypo name='grid' size={30} color={'#084c61'}/>
     }
   }, 
   AddDeck: {
     screen: DeckAdd,
     navigationOptions: {
       tabBarLabel: 'Add Deck',
-      title: 'Add Deck'
+      title: 'Add Deck',
+      tabBarIcon: <Entypo name='add-to-list' size={30} color={'#084c61'}/>
     }
   }
 });
@@ -63,6 +66,5 @@ const MainNavigation = StackNavigator({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'indigo'
   },
 });

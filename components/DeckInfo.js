@@ -18,6 +18,10 @@ export default class DeckInfo extends React.Component {
 
 const styles = StyleSheet.create({
   info: {
-    backgroundColor: 'purple',
+    borderColor: 'black',
+    borderWidth: 1,
+    flex: 1,
+    padding: 10,
+    marginBottom: 5
   },
 });
