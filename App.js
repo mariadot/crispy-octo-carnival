@@ -6,8 +6,13 @@ import DeckAdd from './components/DeckAdd';
 import CardAdd from './components/CardAdd';
 import DeckQuiz from './components/DeckQuiz';
 import { TabNavigator, StackNavigator } from 'react-navigation';
+import { setDummyData } from './utils/api';
 
 export default class App extends React.Component {
+  componentDidMount(){
+    setDummyData();
+  }
+
   render() {
     return (
         <View style={styles.container} >
