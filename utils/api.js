@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 const FLASHCARDS_STORAGE_KEY = 'MobileFlashcards:decks';
 
 export function setDummyData() {
-  const example = {
+  const data = {
     React: {
       id: 'React',
       title: 'React',
@@ -30,7 +30,7 @@ export function setDummyData() {
     }
   };
 
-  AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(example));
+  AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data));
 }
 
 export function getDecks(){
@@ -39,7 +39,9 @@ export function getDecks(){
 }
 
 export function getDeck(id){
-  console.log(id);
+  return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
+    .then((data) => (results = JSON.parse(data)))
+    .then((parsed) => (deck = parsed[id]))
 }
 
 export function saveDeckName(name){

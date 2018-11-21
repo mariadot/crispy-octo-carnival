@@ -1,22 +1,43 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { getDeck } from '../utils/api';
 
 export default class DeckView extends React.Component {
-  static navigationOptions = () => {
+  static navigationOptions = ({navigation}) => {
+    const { deckId } = navigation.state.params;
+
     return {
-      title: 'Deck View'
+      title: deckId
     }
   }
+
+  state = {
+    deck: {}
+  }
+
+  componentDidMount(){
+    getDeck(this.props.navigation.state.params.deckId)
+    .then(
+      (deck) => {
+        this.setState(()=>({
+        deck
+      }))
+    }
+    );
+  }
+
   render() {
-    console.log(this.props);
+    const { deck } = this.state;
+    const questions = deck.questions ? deck.questions.length : 0;
+    console.log(this.state.deck);
     return (
       <View style={styles.deck}>
-        <Text>Deck title</Text>
-        <Text># of cards</Text>
-        <TouchableOpacity style={[styles.button]} onPress={()=> this.props.navigation.navigate('AddCard')} >
+        <Text>{deck.title}</Text>
+        <Text>{questions} { questions > 1 ? 'cards' : 'card'}</Text>
+        <TouchableOpacity style={[styles.button]} onPress={()=> this.props.navigation.navigate('AddCard', { deck: deck.title })} >
           <Text>Add Card</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button]} onPress={()=> this.props.navigation.navigate('ViewQuiz')} >
+        <TouchableOpacity style={[styles.button]} onPress={()=> this.props.navigation.navigate('ViewQuiz', { deck: deck.title })} >
           <Text>Start quiz</Text>
         </TouchableOpacity>
       </View>
