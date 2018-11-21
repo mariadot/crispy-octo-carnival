@@ -2,12 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class DeckAdd extends React.Component {
-  static navigationOptions = () => {
-    return {
-      title: 'Add Deck'
-    }
-  }
-
   render() {
     return (
       <View style={styles.new}>
