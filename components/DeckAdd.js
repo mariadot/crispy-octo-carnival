@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
+import { saveDeckName } from '../utils/api';
 
 export default class DeckAdd extends React.Component {
   state = {
@@ -12,13 +13,22 @@ export default class DeckAdd extends React.Component {
     }))
   }
 
+  addNewDeck = (name) => {
+    if(name){
+      saveDeckName(name)
+      this.props.navigation.navigate('ViewDeck', { deckId: name });
+    } else {
+      alert('Please input the necessary values');
+    }
+  }
+
   render() {
     const { name } = this.state;
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.new}>
         <Text>What is the title of your new deck?</Text>
         <TextInput value={name} style={styles.input} onChangeText={this.handleInputChange} />
-        <TouchableOpacity style={styles.button} onPress={()=>console.log('Add deck!')}>
+        <TouchableOpacity style={styles.button} onPress={()=>this.addNewDeck(this.state.name)}>
           <Text>Add</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>

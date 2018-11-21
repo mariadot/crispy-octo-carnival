@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 export default class DeckInfo extends React.Component {
   render() {
     const { deck } = this.props;
-    const questions = deck.questions.length;
+    const questions = deck.questions ? deck.questions.length : 0;
     return (
       <View style={styles.info}>
         <TouchableOpacity onPress={()=> this.props.navigation.navigate('ViewDeck', { deckId: deck.id })}>
