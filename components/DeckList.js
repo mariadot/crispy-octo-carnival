@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import DeckInfo  from './DeckInfo';
 import { getDecks } from '../utils/api';
 
@@ -24,13 +24,15 @@ export default class DeckList extends React.Component {
     return (
       <View style={styles.list}>
         <Text>Decks</Text>
-        {
-          Object.keys(decks).map((key)=> {
-            return (
-              <DeckInfo key={decks[key].id} deck={decks[key]} navigation={this.props.navigation} />
-            )
-          })
-        }
+        <ScrollView>
+          {
+            Object.keys(decks).map((key)=> {
+              return (
+                <DeckInfo key={decks[key].id} deck={decks[key]} navigation={this.props.navigation} />
+              )
+            })
+          }
+        </ScrollView>
       </View>
     );
   }
