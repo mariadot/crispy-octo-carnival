@@ -50,6 +50,9 @@ export function saveDeckName(name){
   }));
 }
 
-export function addCardToDeck(title, card){
-  console.log(title, card);
+export function addCardToDeck(question, answer, deck){
+  const questions = deck['questions'];
+  return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
+    [deck]: {questions: [questions, { question: question, answer: answer}]}
+  }));
 }

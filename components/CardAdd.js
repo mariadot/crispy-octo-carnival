@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView  } from 'react-native';
+import { addCardToDeck } from '../utils/api';
 
 export default class AddCard extends React.Component {
   state = {
@@ -7,24 +8,41 @@ export default class AddCard extends React.Component {
     answer: ''
   }
 
-  handleInputChange = (e) => {
+  handleQuestionChange = (question) => {
     this.setState(()=>({
-      name
+      question
     }))
+  }
+
+  handleAnswerChange = (answer) => {
+    this.setState(()=>({
+      answer
+    }))
+  }
+
+  createNewCard = (question, answer, deck) => {
+    console.log(this.props.navigation);
+    if(question && answer){
+      addCardToDeck(question, answer, deck);
+      this.props.navigation.navigate('ViewDeck', { deckId: deck });
+    } else {
+      alert('Please input the necessary values');
+    }
   }
 
   render() {
     const { question, answer } = this.state;
+    const { deck } = this.props.navigation.state.params;
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.question}>
         <Text>Add a new card to your deck</Text>
         <View>
           <Text>Question</Text>
-          <TextInput value={question} style={styles.input} onChange={this.handleInputChange} />
+          <TextInput value={question} style={styles.input} onChangeText={this.handleQuestionChange} />
           <Text>Answer</Text>
-          <TextInput value={answer} style={styles.input} onChange={this.handleInputChange} />
+          <TextInput value={answer} style={styles.input} onChangeText={this.handleAnswerChange} />
         </View>
-        <TouchableOpacity style={styles.button} onPress={()=>console.log('Add deck!')}>
+        <TouchableOpacity style={styles.button} onPress={()=>this.createNewCard(question, answer, deck)} >
           <Text>Create</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -35,7 +53,6 @@ export default class AddCard extends React.Component {
 const styles = StyleSheet.create({
   question: {
     flex: 1,
-    backgroundColor: 'salmon',
     alignItems: 'center',
   },
   input: {

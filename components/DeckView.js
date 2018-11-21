@@ -29,7 +29,7 @@ export default class DeckView extends React.Component {
   render() {
     const { deck } = this.state;
     const questions = deck.questions ? deck.questions.length : 0;
-    console.log(this.state.deck);
+
     return (
       <View style={styles.deck}>
         <Text>{deck.title}</Text>
