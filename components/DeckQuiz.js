@@ -21,8 +21,8 @@ export default class DeckQuiz extends React.Component {
     .then(
       (deck) => {
         this.setState(()=>({
-        deck
-      }))
+          deck
+        }))
     }
     );
   }
@@ -33,15 +33,20 @@ export default class DeckQuiz extends React.Component {
     } else {
       console.log('better luck next time');
     };
+
+    this.setState((prevState)=>({
+      currentCardIndex: prevState.currentCardIndex + 1
+    }))
   }
 
   render() {
     const questions = this.state.deck.questions ? this.state.deck.questions : [];
     const currentQuestion = this.state.currentCardIndex;
+
     return (
       <View style={styles.quiz}>
         <Text>Let's quiz!</Text>
-        <Card card={questions[currentQuestion]} onGuessAnswer={this.onGuessAnswer} />
+        <Card card={questions[currentQuestion]} index={currentQuestion} onGuessAnswer={this.onGuessAnswer.bind(this)} />
       </View>
     );
   }

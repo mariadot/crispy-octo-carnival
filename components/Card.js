@@ -4,7 +4,14 @@ import Button from './Button';
 
 export default class Card extends React.Component {
   state = {
-    questionFacing: false
+    questionFacing: false,
+    answered: false
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.index !== prevProps.index){
+      this.flipCard();
+    }
   }
 
   componentWillMount() {
@@ -27,7 +34,7 @@ export default class Card extends React.Component {
     })
   }
 
-  onFlip = () => {
+  flipCard = () => {
     if (this.value >= 90) {
       Animated.spring(this.animatedValue,{
         toValue: 0,
@@ -41,7 +48,19 @@ export default class Card extends React.Component {
         tension: 10
       }).start();
     }
+  }
+
+  onFlip = () => {
+    this.flipCard();
     this.setState((prevState)=>({
+      questionFacing: !prevState.questionFacing
+    }))
+  }
+
+  onUserAnswer(answer){
+    this.props.onGuessAnswer(answer);
+    this.setState((prevState)=>({
+      answered: true,
       questionFacing: !prevState.questionFacing
     }))
   }
@@ -49,8 +68,6 @@ export default class Card extends React.Component {
   render() {
     const answer = this.props.card ? this.props.card.answer : '';
     const question = this.props.card ? this.props.card.question: '';
-    const onGuessAnswer = this.props.onGuessAnswer;
-    console.log(this.state.questionFacing);
 
     const frontAnimatedStyle = {
       transform: [
@@ -61,7 +78,7 @@ export default class Card extends React.Component {
       transform: [
         { rotateX: this.backInterpolate }
       ]
-  }
+    }
 
     return (
       <View style={styles.container}>
@@ -77,8 +94,8 @@ export default class Card extends React.Component {
         </TouchableOpacity>
         { this.state.questionFacing && <View> 
           <Text>Was your guess correct?</Text>
-          <Button text={'yes'} onPress={()=> onGuessAnswer('yes')} />
-          <Button text={'no'} onPress={()=> onGuessAnswer('no')} />
+          <Button text={'yes'} onPress={()=> this.onUserAnswer('yes')} />
+          <Button text={'no'} onPress={()=> this.onUserAnswer('no')} />
         </View>
         }
       </View>
