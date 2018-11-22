@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Card from './Card';
 import { getDeck } from '../utils/api';
 
@@ -56,7 +56,12 @@ export default class DeckQuiz extends React.Component {
     if(this.state.finishedQuiz){
       return (
         <View>
-          <Text>You have finished the quiz! You got {this.state.correctGuesses} out of {this.state.deck.questions.length}</Text>
+          <Text>
+            You have finished the quiz! You got {this.state.correctGuesses} out of {this.state.deck.questions.length}
+          </Text>
+          <TouchableOpacity onPress={()=> this.props.navigation.navigate('Home')}>
+            <Text>Go back home</Text>
+          </TouchableOpacity> 
         </View>
       )
     }

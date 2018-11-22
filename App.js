@@ -45,6 +45,9 @@ const TabNav = TabNavigator({
 const MainNavigation = StackNavigator({
   Home: {
     screen: TabNav,
+    navigationOptions: {
+      headerLeft: null
+    }
   },
   ViewDeck: {
     screen: DeckView
