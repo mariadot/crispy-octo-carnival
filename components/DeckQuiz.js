@@ -28,15 +28,19 @@ export default class DeckQuiz extends React.Component {
   }
 
   onGuessAnswer(guess){
-    if(guess === 'yes'){
-      console.log('hooray!');
+    if (this.state.currentCardIndex === this.state.deck.questions.length -1 ){
+      this.props.navigation.navigate('ViewDeck', { deckId: this.state.deck.id });
     } else {
-      console.log('better luck next time');
-    };
-
-    this.setState((prevState)=>({
-      currentCardIndex: prevState.currentCardIndex + 1
-    }))
+      if(guess === 'yes'){
+        console.log('hooray!');
+      } else {
+        console.log('better luck next time');
+      };
+  
+      this.setState((prevState)=>({
+        currentCardIndex: prevState.currentCardIndex + 1
+      }))
+    }
   }
 
   render() {
