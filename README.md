@@ -6,3 +6,7 @@ For routing, this project uses `react-navigation`. No additional tools or librar
 
 This app was bootstrapped and tested for iOS.
 
+--
+
+Card flip animation implemented following this tutorial: https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
+
