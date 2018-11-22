@@ -13,7 +13,9 @@ export default class DeckQuiz extends React.Component {
 
   state = {
     deck: {},
-    currentCardIndex: 0
+    currentCardIndex: 0,
+    correctGuesses: 0,
+    finishedQuiz: false
   }
 
   componentDidMount(){
@@ -28,15 +30,19 @@ export default class DeckQuiz extends React.Component {
   }
 
   onGuessAnswer(guess){
-    if (this.state.currentCardIndex === this.state.deck.questions.length -1 ){
-      this.props.navigation.navigate('ViewDeck', { deckId: this.state.deck.id });
+    if(guess == 'yes'){
+      this.setState((prevState)=>({
+        correctGuesses: prevState.correctGuesses + 1
+      }))
     } else {
-      if(guess === 'yes'){
-        console.log('hooray!');
-      } else {
-        console.log('better luck next time');
-      };
-  
+      console.log('better luck next time');
+    };
+
+    if (this.state.currentCardIndex === this.state.deck.questions.length -1 ){
+      this.setState(()=>({
+        finishedQuiz: true
+      }))
+    } else {
       this.setState((prevState)=>({
         currentCardIndex: prevState.currentCardIndex + 1
       }))
@@ -46,6 +52,14 @@ export default class DeckQuiz extends React.Component {
   render() {
     const questions = this.state.deck.questions ? this.state.deck.questions : [];
     const currentQuestion = this.state.currentCardIndex;
+
+    if(this.state.finishedQuiz){
+      return (
+        <View>
+          <Text>You have finished the quiz! You got {this.state.correctGuesses} out of {this.state.deck.questions.length}</Text>
+        </View>
+      )
+    }
 
     return (
       <View style={styles.quiz}>
