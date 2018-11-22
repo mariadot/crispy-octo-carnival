@@ -1,4 +1,4 @@
-# React Native Flascards
+# React Native Flashcards
 
 This project was boostrapped with `create-react-native-app`. Once you have downloaded the repo and have `create-react-native-app` globally installed in your machine, please run: `yarn install` and then `expo start`. Please select `i` to launch the iOS emulator.
 
