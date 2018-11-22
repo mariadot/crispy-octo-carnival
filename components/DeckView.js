@@ -21,18 +21,19 @@ export default class DeckView extends React.Component {
         this.setState(()=>({
           deck
         }))
-    }
+      }
     );
   }
 
   render() {
     const { deck } = this.state;
-    const questions = deck.questions ? deck.questions.length : 0;
+    const questions = deck ? deck.questions : [];
+    const questionsLength = questions ? questions.length : 0;
 
     return (
       <View style={styles.deck}>
-        <Text>{deck.title}</Text>
-        <Text>{questions} { questions > 1 ? 'cards' : 'card'}</Text>
+        <Text>{ deck ? deck.title : '' }</Text>
+        <Text>{questionsLength} { questionsLength === 1 ? 'card' : 'cards'}</Text>
         <TouchableOpacity style={[styles.button]} onPress={()=> this.props.navigation.navigate('AddCard', { deck: deck.title })} >
           <Text>Add Card</Text>
         </TouchableOpacity>
