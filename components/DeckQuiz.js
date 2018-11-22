@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import CardView from './CardView';
+import Card from './Card';
 import { getDeck } from '../utils/api';
 
 export default class DeckQuiz extends React.Component {
@@ -27,13 +27,21 @@ export default class DeckQuiz extends React.Component {
     );
   }
 
+  onGuessAnswer(guess){
+    if(guess === 'yes'){
+      console.log('hooray!');
+    } else {
+      console.log('better luck next time');
+    };
+  }
+
   render() {
     const questions = this.state.deck.questions ? this.state.deck.questions : [];
     const currentQuestion = this.state.currentCardIndex;
     return (
       <View style={styles.quiz}>
         <Text>Let's quiz!</Text>
-        <CardView card={questions[currentQuestion]} />
+        <Card card={questions[currentQuestion]} onGuessAnswer={this.onGuessAnswer} />
       </View>
     );
   }

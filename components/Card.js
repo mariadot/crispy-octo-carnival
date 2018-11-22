@@ -2,7 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Animated } from 'react-native';
 import Button from './Button';
 
-export default class CardView extends React.Component {
+export default class Card extends React.Component {
+  state = {
+    questionFacing: false
+  }
+
   componentWillMount() {
     this.animatedValue = new Animated.Value(0);
 
@@ -37,11 +41,16 @@ export default class CardView extends React.Component {
         tension: 10
       }).start();
     }
+    this.setState((prevState)=>({
+      questionFacing: !prevState.questionFacing
+    }))
   }
 
   render() {
     const answer = this.props.card ? this.props.card.answer : '';
     const question = this.props.card ? this.props.card.question: '';
+    const onGuessAnswer = this.props.onGuessAnswer;
+    console.log(this.state.questionFacing);
 
     const frontAnimatedStyle = {
       transform: [
@@ -66,11 +75,12 @@ export default class CardView extends React.Component {
             </Animated.View>
           </View>
         </TouchableOpacity>
-        <View>
+        { this.state.questionFacing && <View> 
           <Text>Was your guess correct?</Text>
-          <Button text={'yes'} onPress={()=> console.log('yes')} />
-          <Button text={'no'} onPress={()=> console.log('no')} />
+          <Button text={'yes'} onPress={()=> onGuessAnswer('yes')} />
+          <Button text={'no'} onPress={()=> onGuessAnswer('no')} />
         </View>
+        }
       </View>
     );
   }

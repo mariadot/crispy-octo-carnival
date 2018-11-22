@@ -19,8 +19,8 @@ export default class DeckView extends React.Component {
     .then(
       (deck) => {
         this.setState(()=>({
-        deck
-      }))
+          deck
+        }))
     }
     );
   }
