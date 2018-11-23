@@ -110,16 +110,19 @@ const styles = StyleSheet.create({
       justifyContent: "center",
     },
     card: {
-      backgroundColor: 'blue',
+      borderColor: 'black',
+      borderWidth: 1,
+      borderStyle: 'solid',
       width: 200,
       height: 300,
       alignItems: 'center',
       justifyContent: 'center',
-      backfaceVisibility: 'hidden'
+      backfaceVisibility: 'hidden',
+      borderRadius: 5,
     },
 
     flipCardBack: {
-      backgroundColor: 'lightpink',
+      padding: 10,
       position: 'absolute',
       top: 0
     }

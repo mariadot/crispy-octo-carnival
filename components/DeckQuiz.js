@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Card from './Card';
 import { getDeck } from '../utils/api';
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications';
 
 export default class DeckQuiz extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -42,6 +43,8 @@ export default class DeckQuiz extends React.Component {
       this.setState(()=>({
         finishedQuiz: true
       }))
+      clearLocalNotification()
+        .then(setLocalNotification)
     } else {
       this.setState((prevState)=>({
         currentCardIndex: prevState.currentCardIndex + 1
@@ -55,12 +58,12 @@ export default class DeckQuiz extends React.Component {
 
     if(this.state.finishedQuiz){
       return (
-        <View>
+        <View style={styles.finished}>
           <Text>
             You have finished the quiz! You got {this.state.correctGuesses} out of {this.state.deck.questions.length}
           </Text>
           <TouchableOpacity onPress={()=> this.props.navigation.navigate('Home')}>
-            <Text>Go back home</Text>
+            <Text style={styles.goHome} >Go back home</Text>
           </TouchableOpacity> 
         </View>
       )
@@ -78,6 +81,11 @@ export default class DeckQuiz extends React.Component {
 const styles = StyleSheet.create({
   quiz: {
     flex: 1,
-    backgroundColor: 'lightcyan',
   },
+  goHome: {
+    margin: 5
+  },
+  finished: {
+    alignItems: 'center',
+  }
 });

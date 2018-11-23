@@ -6,12 +6,12 @@ import DeckAdd from './components/DeckAdd';
 import CardAdd from './components/CardAdd';
 import DeckQuiz from './components/DeckQuiz';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { setDummyData } from './utils/api';
 import { Entypo } from '@expo/vector-icons';
+import { setLocalNotification } from './utils/notifications';
 
 export default class App extends React.Component {
   componentDidMount(){
-    setDummyData();
+    setLocalNotification();
   }
 
   render() {
