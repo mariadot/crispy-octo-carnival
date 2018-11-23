@@ -56,6 +56,16 @@ export default class DeckQuiz extends React.Component {
     const questions = this.state.deck.questions ? this.state.deck.questions : [];
     const currentQuestion = this.state.currentCardIndex;
 
+    if(questions.length === 0) {
+      return(
+        <View>
+          <Text>No questions are available to be quizzed.</Text>
+          <TouchableOpacity onPress={()=> this.props.navigation.navigate('Home')}>
+            <Text style={styles.goHome} >Go back home</Text>
+          </TouchableOpacity>
+        </View>
+      )
+    }
     if(this.state.finishedQuiz){
       return (
         <View style={styles.finished}>
