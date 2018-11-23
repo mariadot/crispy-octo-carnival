@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import DeckInfo  from './DeckInfo';
 import { getDecks } from '../utils/api';
+
 export default class DeckList extends React.Component {
   state = {
     decks: {}

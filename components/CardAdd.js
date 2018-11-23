@@ -1,12 +1,25 @@
 import React from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity, KeyboardAvoidingView  } from 'react-native';
-import { addCardToDeck } from '../utils/api';
+import { addCardToDeck, getDeck } from '../utils/api';
 
 export default class AddCard extends React.Component {
   state = {
     question: '',
-    answer: ''
+    answer: '',
+    deck: {}
   }
+
+  componentDidMount(){
+    getDeck(this.props.navigation.state.params.deck)
+    .then(
+      (deck) => {
+        this.setState(()=>({
+          deck
+        }))
+      }
+    );
+  }
+
   // Controlled component
   handleQuestionChange = (question) => {
     this.setState(()=>({
@@ -24,7 +37,7 @@ export default class AddCard extends React.Component {
   createNewCard = (question, answer, deck) => {
     if(question && answer){
       addCardToDeck(question, answer, deck);
-      this.props.navigation.navigate('ViewDeck', { deckId: deck });
+      this.props.navigation.navigate('ViewDeck', { deckId: deck.id });
     } else {
       alert('Please input the necessary values');
     }
@@ -32,7 +45,7 @@ export default class AddCard extends React.Component {
 
   render() {
     const { question, answer } = this.state;
-    const { deck } = this.props.navigation.state.params;
+    const { deck } = this.state;
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.question}>
         <Text>Add a new card to your deck</Text>

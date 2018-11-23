@@ -17,6 +17,9 @@ export default class DeckAdd extends React.Component {
     if(name){
       saveDeckName(name)
       this.props.navigation.navigate('ViewDeck', { deckId: name });
+      this.setState(()=>({
+        name: ''
+      }))
     } else {
       alert('Please input the necessary values');
     }
